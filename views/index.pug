@@ -1,0 +1,49 @@
+extends layout
+
+block content
+  section#portfolio.page-section.portfolio
+      .container
+        // Portfolio Section Heading
+        h2.page-section-heading.text-center.text-uppercase.text-secondary.mb-0 Portfolio
+        // Icon Divider
+        .divider-custom
+          .divider-custom-line
+          .divider-custom-icon
+            i.fas.fa-star
+          .divider-custom-line
+        // Portfolio Grid Items
+        .row
+        each row, i in rows
+          .col-md-6.col-lg-4
+            .portfolio-item.mx-auto(data-toggle='modal', data-target='#portfolioModal'+i)
+              .portfolio-item-caption.d-flex.align-items-center.justify-content-center.h-100.w-100
+                .portfolio-item-caption-content.text-center.text-white
+                  i.fas.fa-plus.fa-3x
+              img.img-fluid(src='img/portfolio/'+row.image, alt='')
+      each row, i in rows
+        div(id='portfolioModal'+i).portfolio-modal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='portfolioModal1Label', aria-hidden='true')
+          .modal-dialog.modal-xl(role='document')
+            .modal-content
+              button.close(type='button', data-dismiss='modal', aria-label='Close')
+                span(aria-hidden='true')
+                  i.fas.fa-times
+              .modal-body.text-center
+                .container
+                  .row.justify-content-center
+                    .col-lg-8
+                      // Portfolio Modal - Title
+                      h2.portfolio-modal-title.text-secondary.text-uppercase.mb-0 #{row.title}
+                      // Icon Divider
+                      .divider-custom
+                        .divider-custom-line
+                        .divider-custom-icon
+                          i.fas.fa-star
+                        .divider-custom-line
+                      // Portfolio Modal - Image
+                      img.img-fluid.rounded.mb-5(src='img/portfolio/'+row.image, alt='')
+                      // Portfolio Modal - Text
+                      p.mb-5
+                        | #{row.description}
+                      button.btn.btn-primary(href='#', data-dismiss='modal')
+                        i.fas.fa-times.fa-fw
+                        |                   Close Window
